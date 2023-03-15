@@ -8,8 +8,7 @@ class Canal():
         '''Constructor de la clase. Se debe inicializar la lista de objetos Store al
         ser creado un canal.
         '''
-        self.capacidad = capacidad
-        self.almacen_objetos = []
+    
 
     def envia(self, mensaje, vecinos):
         '''
