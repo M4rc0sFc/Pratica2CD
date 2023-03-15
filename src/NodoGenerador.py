@@ -8,8 +8,12 @@ class NodoGenerador(Nodo):
     '''Implementa la interfaz de Nodo para el algoritmo de flooding.'''
     def __init__(self, id_nodo, vecinos, canal_entrada, canal_salida):
         '''Inicializamos el nodo.'''
-        return
+        self.id_nodo = id_nodo
+        self.vecinos = vecinos
+        self.canal_entrada = canal_entrada
+        self.canal_salida = canal_salida
+        self.padre = None
 
     def genera_arbol(self, env):
-        return
+        yield env.timeout(1)
 
