@@ -9,7 +9,9 @@ TICK = 1
 class NodoBroadcast(Nodo):
     ''' Implementa la interfaz de Nodo para el algoritmo de Broadcast.'''
     def __init__(self, id_nodo, vecinos, canal_entrada, canal_salida, mensaje=None):
+        return
 
     def broadcast(self, env):
         ''' Algoritmo de Broadcast. Desde el nodo distinguido (0)
             vamos a enviar un mensaje a todos los demás nodos.'''
+        return
