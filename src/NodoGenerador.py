@@ -13,6 +13,9 @@ class NodoGenerador(Nodo):
         self.canal_entrada = canal_entrada
         self.canal_salida = canal_salida
         self.padre = None
+        if(id_nodo == 0):
+            self.padre = id_nodo
+        self.hijos = vecinos
 
     def genera_arbol(self, env):
         yield env.timeout(1)

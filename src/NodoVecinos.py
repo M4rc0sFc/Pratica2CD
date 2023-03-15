@@ -10,19 +10,18 @@ class NodoVecinos(Nodo):
         self.id_nodo = id_nodo
         self.vecinos = vecinos
         self.canal_entrada = canal_entrada
+        print(type(canal_entrada))
         self.canal_salida = canal_salida
 
-        self.identifiers = []
-        self.canal_salida.envia(self.vecinos, self.vecinos)
+        self.identifiers = set()
+        
 
 
     def conoceVecinos(self, env):
         ''' Algoritmo que hace que el nodo conozca a los vecinos de sus vecinos.
             Lo guarda en la variable identifiers.'''
-
-        
-        self.canal_salida.envia(self.identifiers, self.vecinos)
-        print(self.canal_entrada)
-
-        yield env.timeout(1)
+        self.canal_salida.envia(self.vecinos, self.vecinos)
+        while True:
+            mensaje = yield self.canal_entrada.get()
+            self.identifiers.update(mensaje)
 

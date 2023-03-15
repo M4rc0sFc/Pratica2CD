@@ -15,12 +15,8 @@ class Canal():
         '''
         Envia un mensaje a los canales de entrada de los vecinos.
         '''
-        for vecino in vecinos:
-           vecino.canal_entrada = mensaje
-
 
     def crea_canal_de_entrada(self):
         '''
         Creamos un objeto Store en el un nodo recibirá los mensajes.
         '''
-        almacen_mensajes = [] 
