@@ -13,7 +13,6 @@ class NodoBroadcast(Nodo):
         self.vecinos = vecinos
         self.canal_entrada = canal_entrada
         self.canal_salida = canal_salida
-        self.mensaje = mensaje
         
 
     def broadcast(self, env):
@@ -21,8 +20,11 @@ class NodoBroadcast(Nodo):
             vamos a enviar un mensaje a todos los demás nodos.'''
 
         if self.id_nodo == 0:
-            yield env.timeout(tick)
+            self.mensaje = "Mensaje a enviar"
             self.canal_salida.envia(self.mensaje, self.vecinos)
+        else:
+            self.mensaje = None
             
-        self.canal_salida.envia(self.mensaje, self.vecinos)
-        yield env.timeout(TICK)
+        while True:
+            self.mensaje = yield self.canal_entrada.get()
+            self.canal_salida.envia(self.mensaje, self.vecinos)
