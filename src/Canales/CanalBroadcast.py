@@ -8,15 +8,25 @@ class CanalBroadcast(Canal):
     def __init__(self, env, capacidad=simpy.core.Infinity):
         self.env = env
         self.capacidad = capacidad
-        self.almacen_objetos = []
+        self.canales = []
 
     def envia(self, mensaje, vecinos):
         '''
         Envia un mensaje a los canales de salida de los vecinos.
         '''
+        if not self.canales:
+            raise RuntimeError('No hay canales de salida.')
+        # eventos = [store.put(mensaje) for store in self.canales]
+        eventos = list()
+        for i in range(len(self.canales)):
+            if i in vecinos:
+                eventos.append(self.canales[i].put(mensaje))
+        return self.env.all_of(eventos)
 
     def crea_canal_de_entrada(self):
         '''
         Creamos un canal de entrada
         '''
-        return self
+        canal_entrada = simpy.Store(self.env, capacity=self.capacidad)
+        self.canales.append(canal_entrada)
+        return canal_entrada
